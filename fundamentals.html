@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DevOps Fundamentals - DevOps, QA and Test Automation</title>
+  <style>
+    :root { color-scheme: light; --ink: #18212f; --muted: #5d6675; --line: #d9e0e8; --surface: #f7f9fc; --white: #ffffff; --blue: #2477d4; --green: #1f9d68; --red: #d34f37; --yellow: #d9a820; --purple: #7b5cd6; --teal: #1596a6; --shadow: 0 18px 45px rgba(21, 34, 55, 0.12); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; } body { margin: 0; color: var(--ink); background: #eef3f7; } a { color: inherit; }
+    .topbar { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid rgba(217, 224, 232, 0.86); background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); }
+    .nav { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-weight: 900; text-decoration: none; } .links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .links a { border: 1px solid transparent; border-radius: 8px; padding: 9px 12px; color: var(--muted); font-weight: 800; font-size: 0.88rem; text-decoration: none; }
+    .links a[aria-current="page"], .links a:hover { border-color: var(--line); color: var(--ink); background: var(--surface); }
+    .hero { background: linear-gradient(90deg, rgba(10, 18, 32, 0.92), rgba(10, 18, 32, 0.58)), url("assets/devops-dashboard-photo.jpg") center/cover; color: white; }
+    .inner { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; } .hero .inner { padding: 78px 0 86px; }
+    .kicker { margin: 0 0 16px; color: #a8e4c4; font-size: 0.82rem; font-weight: 900; text-transform: uppercase; }
+    h1 { width: min(880px, 100%); margin: 0; font-size: clamp(2.35rem, 5vw, 4.8rem); line-height: 1; letter-spacing: 0; }
+    .lead { width: min(720px, 100%); margin: 22px 0 0; color: rgba(255, 255, 255, 0.84); font-size: 1.05rem; line-height: 1.7; }
+    .band { padding: 54px 0; background: var(--surface); } .band.white { background: var(--white); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 22px; }
+    h2 { margin: 0; font-size: clamp(1.75rem, 3vw, 2.7rem); } .section-head p { width: min(500px, 100%); margin: 0; color: var(--muted); line-height: 1.55; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .card { border: 1px solid var(--line); border-radius: 8px; background: var(--white); box-shadow: 0 10px 28px rgba(31, 45, 66, 0.06); padding: 20px; }
+    .card h3 { margin: 0 0 10px; font-size: 1.22rem; } .card p, .card li, .term span { color: var(--muted); line-height: 1.58; } .card p { margin: 0; } .card ul { margin: 0; padding-left: 18px; }
+    .term { display: grid; grid-template-columns: 170px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); } .term:last-child { border-bottom: 0; } .term b { color: var(--ink); }
+    footer { padding: 28px 0; border-top: 1px solid var(--line); background: var(--white); color: var(--muted); }
+    @media (max-width: 940px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; } .links { justify-content: flex-start; } .grid, .term { grid-template-columns: 1fr; } .section-head { display: block; } .section-head p { margin-top: 12px; } .hero .inner { padding: 56px 0 64px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Site navigation">
+      <a class="brand" href="index.html">DevOps, QA and Test Automation</a>
+      <div class="links">
+        <a href="index.html">Dashboard</a>
+        <a href="fundamentals.html" aria-current="page">Fundamentals</a>
+        <a href="tools.html">Tools Guide</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="cicd.html">CI/CD Lab</a>
+        <a href="study-materials.html">Study Materials</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero"><div class="inner"><p class="kicker">Beginner foundation</p><h1>DevOps fundamentals for new team members</h1><p class="lead">A plain-language starting point for understanding how development, QA, operations, and platform work connect into one delivery system.</p></div></section>
+    <section class="band"><div class="inner"><div class="section-head"><h2>Core Ideas</h2><p>DevOps is less about one tool and more about shortening feedback loops while keeping releases reliable.</p></div><div class="grid">
+      <article class="card"><h3>Collaboration</h3><p>Developers, testers, security, and operations work from shared goals, shared evidence, and shared responsibility for production outcomes.</p></article>
+      <article class="card"><h3>Automation</h3><p>Repeated work becomes scripted and reviewable: builds, tests, infrastructure changes, deployments, rollback, and monitoring setup.</p></article>
+      <article class="card"><h3>Feedback</h3><p>Every pipeline step should answer a useful question quickly: does it build, does it work, is it safe, and what changed after release?</p></article>
+    </div></div></section>
+    <section class="band white"><div class="inner"><div class="section-head"><h2>Essential Vocabulary</h2><p>Use these terms as anchors when reading the rest of the site.</p></div><div class="card">
+      <div class="term"><b>Continuous Integration</b><span>Frequent code merges validated by automated builds, unit tests, linting, and other fast checks.</span></div>
+      <div class="term"><b>Continuous Delivery</b><span>A release approach where software is always kept in a deployable state, even if deployment still needs approval.</span></div>
+      <div class="term"><b>Infrastructure as Code</b><span>Cloud, network, and platform resources described in files so changes can be reviewed, versioned, and repeated.</span></div>
+      <div class="term"><b>Quality Gate</b><span>A required check that must pass before a change moves forward, such as tests, scans, approvals, or smoke checks.</span></div>
+      <div class="term"><b>Observability</b><span>Metrics, logs, traces, and alerts that help teams understand what software is doing after deployment.</span></div>
+    </div></div></section>
+    <section class="band"><div class="inner"><div class="section-head"><h2>Beginner Roadmap</h2><p>A practical order for learning without getting buried in tool names.</p></div><div class="grid">
+      <article class="card"><h3>Week 1: Source and Tests</h3><ul><li>Learn Git branches, pull requests, and code review.</li><li>Run unit tests and understand pass/fail signals.</li><li>Read one CI pipeline file from top to bottom.</li></ul></article>
+      <article class="card"><h3>Week 2: Build and Release</h3><ul><li>Package an app into a versioned artifact.</li><li>Learn Docker image basics and environment variables.</li><li>Trace how a change reaches staging.</li></ul></article>
+      <article class="card"><h3>Week 3: Operate and Improve</h3><ul><li>Read a dashboard and identify service health signals.</li><li>Follow an alert to logs or traces.</li><li>Write one improvement from production evidence.</li></ul></article>
+    </div></div></section>
+  </main>
+  <footer><div class="inner">DevOps, QA and Test Automation Dashboard (c) 2026</div></footer>
+</body>
+</html>

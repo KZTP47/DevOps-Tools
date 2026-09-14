@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CI/CD Lab Guide - DevOps, QA and Test Automation</title>
+  <style>
+    :root { color-scheme: light; --ink: #18212f; --muted: #5d6675; --line: #d9e0e8; --surface: #f7f9fc; --white: #ffffff; --blue: #2477d4; --green: #1f9d68; --red: #d34f37; --yellow: #d9a820; --purple: #7b5cd6; --teal: #1596a6; --shadow: 0 18px 45px rgba(21, 34, 55, 0.12); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; } body { margin: 0; color: var(--ink); background: #eef3f7; } a { color: inherit; }
+    .topbar { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid rgba(217, 224, 232, 0.86); background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); }
+    .nav { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-weight: 900; text-decoration: none; } .links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .links a { border: 1px solid transparent; border-radius: 8px; padding: 9px 12px; color: var(--muted); font-weight: 800; font-size: 0.88rem; text-decoration: none; }
+    .links a[aria-current="page"], .links a:hover { border-color: var(--line); color: var(--ink); background: var(--surface); }
+    .hero { background: linear-gradient(90deg, rgba(10, 18, 32, 0.92), rgba(10, 18, 32, 0.58)), url("assets/devops-dashboard-photo.jpg") center/cover; color: white; }
+    .inner { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; } .hero .inner { padding: 78px 0 86px; }
+    .kicker { margin: 0 0 16px; color: #a8e4c4; font-size: 0.82rem; font-weight: 900; text-transform: uppercase; }
+    h1 { width: min(880px, 100%); margin: 0; font-size: clamp(2.35rem, 5vw, 4.8rem); line-height: 1; letter-spacing: 0; }
+    .lead { width: min(720px, 100%); margin: 22px 0 0; color: rgba(255, 255, 255, 0.84); font-size: 1.05rem; line-height: 1.7; }
+    .band { padding: 54px 0; background: var(--surface); } .band.white { background: var(--white); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 22px; }
+    h2 { margin: 0; font-size: clamp(1.75rem, 3vw, 2.7rem); } .section-head p { width: min(500px, 100%); margin: 0; color: var(--muted); line-height: 1.55; }
+    .steps { display: grid; gap: 14px; } .step { display: grid; grid-template-columns: 92px 1fr; gap: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); box-shadow: 0 10px 28px rgba(31, 45, 66, 0.06); padding: 18px; }
+    .num { width: 58px; height: 58px; border-radius: 8px; display: grid; place-items: center; color: white; background: var(--blue); font-weight: 900; font-size: 1.4rem; } .step:nth-child(2) .num { background: var(--green); } .step:nth-child(3) .num { background: var(--yellow); color: #2f2508; } .step:nth-child(4) .num { background: var(--purple); } .step:nth-child(5) .num { background: var(--teal); } .step:nth-child(6) .num { background: var(--red); }
+    .step h3 { margin: 0 0 8px; } .step p, .step li { color: var(--muted); line-height: 1.58; } .step p { margin: 0; } .step ul { margin: 10px 0 0; padding-left: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } .card { border: 1px solid var(--line); border-radius: 8px; background: var(--white); box-shadow: var(--shadow); padding: 20px; } .card h3 { margin: 0 0 10px; } .card li { color: var(--muted); line-height: 1.65; }
+    footer { padding: 28px 0; border-top: 1px solid var(--line); background: var(--white); color: var(--muted); }
+    @media (max-width: 700px) { .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; } .links { justify-content: flex-start; } .grid, .step { grid-template-columns: 1fr; } .section-head { display: block; } .section-head p { margin-top: 12px; } .hero .inner { padding: 56px 0 64px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar"><nav class="nav" aria-label="Site navigation"><a class="brand" href="index.html">DevOps, QA and Test Automation</a><div class="links"><a href="index.html">Dashboard</a><a href="fundamentals.html">Fundamentals</a><a href="tools.html">Tools Guide</a><a href="architecture.html">Architecture</a><a href="cicd.html" aria-current="page">CI/CD Lab</a><a href="study-materials.html">Study Materials</a></div></nav></header>
+  <main>
+    <section class="hero"><div class="inner"><p class="kicker">Hands-on model</p><h1>Build your first CI/CD mental model</h1><p class="lead">A lab-style walkthrough that explains what each pipeline stage does, what evidence it should produce, and how a new user can practice it safely.</p></div></section>
+    <section class="band"><div class="inner"><div class="section-head"><h2>Pipeline Walkthrough</h2><p>Think of the pipeline as a sequence of confidence-building checks, not just a button that deploys code.</p></div><div class="steps">
+      <article class="step"><div class="num">1</div><div><h3>Commit and Pull Request</h3><p>A change starts with a small branch, clear description, linked work item, and reviewable diff.</p><ul><li>Practice: write a pull request summary with risk and test notes.</li><li>Evidence: reviewers can see what changed and why.</li></ul></div></article>
+      <article class="step"><div class="num">2</div><div><h3>Static Checks</h3><p>Linting, formatting, type checks, dependency checks, and secret scanning catch cheap mistakes early.</p><ul><li>Practice: identify which checks should fail fast before long tests run.</li><li>Evidence: the pipeline reports clear pass/fail status.</li></ul></div></article>
+      <article class="step"><div class="num">3</div><div><h3>Build Artifact</h3><p>The pipeline creates a repeatable package, often a container image, with a version that can be traced back to the commit.</p><ul><li>Practice: map an image tag or artifact version back to a source commit.</li><li>Evidence: the same artifact can move through environments.</li></ul></div></article>
+      <article class="step"><div class="num">4</div><div><h3>Automated Tests</h3><p>Unit, API, integration, browser, accessibility, and performance tests run at the depth appropriate for the change.</p><ul><li>Practice: decide which tests belong in pull request checks and which belong before release.</li><li>Evidence: failures explain the broken behavior, not just that something failed.</li></ul></div></article>
+      <article class="step"><div class="num">5</div><div><h3>Deploy and Verify</h3><p>Deployment updates infrastructure or workloads, then smoke tests and health checks confirm the release is usable.</p><ul><li>Practice: define a three-check smoke test for a web app.</li><li>Evidence: release logs show what version went where and when.</li></ul></div></article>
+      <article class="step"><div class="num">6</div><div><h3>Observe and Roll Back</h3><p>Dashboards, alerts, and logs reveal whether the release improved or harmed production behavior.</p><ul><li>Practice: choose one metric, one log query, and one alert that would catch a bad deploy.</li><li>Evidence: teams can roll back or fix forward using production signals.</li></ul></div></article>
+    </div></div></section>
+    <section class="band white"><div class="inner"><div class="section-head"><h2>Lab Exercises</h2><p>Use these as discussion prompts or practical assignments for beginners.</p></div><div class="grid">
+      <article class="card"><h3>Design a Pipeline</h3><ul><li>Pick a simple web app.</li><li>List the build, test, deploy, and observe stages.</li><li>Mark which failures should block release.</li></ul></article>
+      <article class="card"><h3>Debug a Failed Release</h3><ul><li>Read a failed test message.</li><li>Find the pipeline stage where it appeared.</li><li>Write the next action for the developer, tester, and operator.</li></ul></article>
+    </div></div></section>
+  </main>
+  <footer><div class="inner">DevOps, QA and Test Automation Dashboard (c) 2026</div></footer>
+</body>
+</html>

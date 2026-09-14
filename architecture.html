@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Delivery Architecture - DevOps, QA and Test Automation</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18212f;
+      --muted: #5d6675;
+      --line: #d9e0e8;
+      --surface: #f7f9fc;
+      --white: #ffffff;
+      --blue: #2477d4;
+      --green: #1f9d68;
+      --red: #d34f37;
+      --yellow: #d9a820;
+      --purple: #7b5cd6;
+      --teal: #1596a6;
+      --shadow: 0 18px 45px rgba(21, 34, 55, 0.12);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: #eef3f7; }
+    a { color: inherit; }
+
+    .topbar { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid rgba(217, 224, 232, 0.86); background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); }
+    .nav { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-weight: 900; text-decoration: none; }
+    .links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .links a { border: 1px solid transparent; border-radius: 8px; padding: 9px 12px; color: var(--muted); font-weight: 800; font-size: 0.88rem; text-decoration: none; }
+    .links a[aria-current="page"], .links a:hover { border-color: var(--line); color: var(--ink); background: var(--surface); }
+
+    .hero { background: linear-gradient(90deg, rgba(10, 18, 32, 0.92), rgba(10, 18, 32, 0.58)), url("assets/devops-dashboard-photo.jpg") center/cover; color: white; }
+    .inner { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; }
+    .hero .inner { padding: 78px 0 86px; }
+    .kicker { margin: 0 0 16px; color: #a8e4c4; font-size: 0.82rem; font-weight: 900; text-transform: uppercase; }
+    h1 { width: min(880px, 100%); margin: 0; font-size: clamp(2.35rem, 5vw, 4.8rem); line-height: 1; letter-spacing: 0; }
+    .lead { width: min(720px, 100%); margin: 22px 0 0; color: rgba(255, 255, 255, 0.84); font-size: 1.05rem; line-height: 1.7; }
+
+    .band { padding: 54px 0; background: var(--surface); }
+    .band.white { background: var(--white); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 22px; }
+    h2 { margin: 0; font-size: clamp(1.75rem, 3vw, 2.7rem); }
+    .section-head p { width: min(500px, 100%); margin: 0; color: var(--muted); line-height: 1.55; }
+
+    .timeline { display: grid; grid-template-columns: repeat(7, minmax(120px, 1fr)); gap: 12px; overflow-x: auto; padding-bottom: 4px; }
+    .stage { min-width: 145px; border: 1px solid var(--line); border-top: 5px solid var(--blue); border-radius: 8px; background: var(--white); box-shadow: 0 10px 28px rgba(31, 45, 66, 0.06); padding: 16px; }
+    .stage:nth-child(2) { border-top-color: var(--green); } .stage:nth-child(3) { border-top-color: var(--yellow); } .stage:nth-child(4) { border-top-color: var(--purple); } .stage:nth-child(5) { border-top-color: var(--teal); } .stage:nth-child(6) { border-top-color: var(--red); } .stage:nth-child(7) { border-top-color: #536276; }
+    .stage small { color: var(--muted); font-weight: 900; text-transform: uppercase; }
+    .stage h3 { margin: 10px 0 8px; font-size: 1.18rem; }
+    .stage p { margin: 0; color: var(--muted); line-height: 1.5; font-size: 0.94rem; }
+
+    .flow { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; align-items: stretch; }
+    .panel { border: 1px solid var(--line); border-radius: 8px; background: var(--white); box-shadow: var(--shadow); padding: 22px; }
+    .panel h3 { margin: 0 0 14px; }
+    .panel ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.7; }
+    svg { width: 100%; aspect-ratio: 16 / 9; display: block; }
+
+    .stack-table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 8px; background: var(--white); box-shadow: var(--shadow); }
+    .stack-table th, .stack-table td { border-bottom: 1px solid var(--line); padding: 16px; text-align: left; vertical-align: top; }
+    .stack-table th { background: #eaf0f6; font-size: 0.88rem; text-transform: uppercase; }
+    .stack-table tr:last-child td { border-bottom: 0; }
+    .stack-table td { color: var(--muted); line-height: 1.55; }
+    .stack-table strong { color: var(--ink); }
+
+    footer { padding: 28px 0; border-top: 1px solid var(--line); background: var(--white); color: var(--muted); }
+
+    @media (max-width: 900px) { .flow { grid-template-columns: 1fr; } .stack-table { display: block; overflow-x: auto; } }
+    @media (max-width: 640px) { .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; } .links { justify-content: flex-start; } .section-head { display: block; } .section-head p { margin-top: 12px; } .hero .inner { padding: 56px 0 64px; } .panel { padding: 16px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Site navigation">
+      <a class="brand" href="index.html">DevOps, QA and Test Automation</a>
+      <div class="links">
+        <a href="index.html">Dashboard</a>
+        <a href="fundamentals.html">Fundamentals</a>
+        <a href="tools.html">Tools Guide</a>
+        <a href="architecture.html" aria-current="page">Architecture</a>
+        <a href="cicd.html">CI/CD Lab</a>
+        <a href="study-materials.html">Study Materials</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="inner">
+        <p class="kicker">Delivery architecture</p>
+        <h1>From code change to production feedback</h1>
+        <p class="lead">A structured reference for the stages, checks, and platform responsibilities that make a CI/CD and QA automation system reliable.</p>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="inner">
+        <div class="section-head">
+          <h2>The Seven Stages</h2>
+          <p>Each stage narrows risk before release and returns useful evidence to the next planning cycle.</p>
+        </div>
+        <div class="timeline" aria-label="Continuous delivery lifecycle stages">
+          <article class="stage"><small>Stage 1</small><h3>Plan</h3><p>Define scope, risks, acceptance criteria, observability needs, and quality gates before implementation starts.</p></article>
+          <article class="stage"><small>Stage 2</small><h3>Code</h3><p>Use branches, code review, unit tests, linting, secrets hygiene, and pre-commit checks to protect the mainline.</p></article>
+          <article class="stage"><small>Stage 3</small><h3>Build</h3><p>Compile, package, scan dependencies, produce immutable artifacts, and publish versioned container images.</p></article>
+          <article class="stage"><small>Stage 4</small><h3>Test</h3><p>Run browser, API, integration, accessibility, and performance checks at the right depth for the change.</p></article>
+          <article class="stage"><small>Stage 5</small><h3>Deploy</h3><p>Provision infrastructure, roll out workloads, validate health checks, and preserve rollback paths.</p></article>
+          <article class="stage"><small>Stage 6</small><h3>Observe</h3><p>Collect metrics, logs, traces, alerts, and user-impact signals so operations are visible after release.</p></article>
+          <article class="stage"><small>Stage 7</small><h3>Improve</h3><p>Feed incidents, flaky tests, performance trends, and escaped defects back into planning and backlog decisions.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band white">
+      <div class="inner">
+        <div class="section-head">
+          <h2>Pipeline Model</h2>
+          <p>The most effective toolchains connect automation evidence instead of treating each tool as an isolated island.</p>
+        </div>
+        <div class="flow">
+          <div class="panel">
+            <h3>Reference flow</h3>
+            <svg viewBox="0 0 900 510" role="img" aria-label="Pipeline from plan to improve">
+              <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#536276"></path></marker></defs>
+              <rect x="25" y="52" width="130" height="70" rx="8" fill="#e7f0ff" stroke="#2477d4"></rect><text x="90" y="92" text-anchor="middle" font-size="17" font-weight="800" fill="#18212f">Plan</text>
+              <rect x="200" y="52" width="130" height="70" rx="8" fill="#edf8f2" stroke="#1f9d68"></rect><text x="265" y="92" text-anchor="middle" font-size="17" font-weight="800" fill="#18212f">Code</text>
+              <rect x="375" y="52" width="130" height="70" rx="8" fill="#fff6db" stroke="#d9a820"></rect><text x="440" y="92" text-anchor="middle" font-size="17" font-weight="800" fill="#18212f">Build</text>
+              <rect x="550" y="52" width="130" height="70" rx="8" fill="#f1edff" stroke="#7b5cd6"></rect><text x="615" y="92" text-anchor="middle" font-size="17" font-weight="800" fill="#18212f">Test</text>
+              <rect x="725" y="210" width="130" height="70" rx="8" fill="#e7f7f9" stroke="#1596a6"></rect><text x="790" y="250" text-anchor="middle" font-size="17" font-weight="800" fill="#18212f">Deploy</text>
+              <rect x="490" y="380" width="130" height="70" rx="8" fill="#ffede8" stroke="#d34f37"></rect><text x="555" y="420" text-anchor="middle" font-size="17" font-weight="800" fill="#18212f">Observe</text>
+              <rect x="230" y="380" width="130" height="70" rx="8" fill="#eaf0f6" stroke="#536276"></rect><text x="295" y="420" text-anchor="middle" font-size="17" font-weight="800" fill="#18212f">Improve</text>
+              <path d="M155 87 H200" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path><path d="M330 87 H375" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path><path d="M505 87 H550" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path><path d="M680 87 C760 95 796 145 790 210" fill="none" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path><path d="M790 280 C766 364 681 413 620 415" fill="none" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path><path d="M490 415 H360" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path><path d="M295 380 C238 300 90 250 90 122" fill="none" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path>
+            </svg>
+          </div>
+          <div class="panel">
+            <h3>Quality gates</h3>
+            <ul>
+              <li>Pull request validation: linting, unit tests, security checks, and review approval.</li>
+              <li>Build validation: reproducible artifacts, dependency scanning, and versioned images.</li>
+              <li>Release validation: API regression, browser journeys, load checks, and smoke tests.</li>
+              <li>Production validation: metrics, logs, alerts, incident trends, and user-impact signals.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="inner">
+        <div class="section-head"><h2>Stack Patterns</h2><p>Different teams need different tradeoffs between speed, control, test depth, and platform ownership.</p></div>
+        <table class="stack-table">
+          <thead><tr><th>Team profile</th><th>CI/CD and IaC</th><th>Testing and QA</th><th>Runtime and monitoring</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Lean Web Team</strong><br>Small team optimizing for quick feedback and low operations burden.</td><td>GitHub Actions</td><td>Playwright and Postman</td><td>Docker with lightweight metrics and hosted deployment targets</td></tr>
+            <tr><td><strong>Platform Engineering</strong><br>Team owning cloud patterns, deployment guardrails, and shared services.</td><td>Terraform and GitLab CI/CD</td><td>API contract suites and smoke tests</td><td>Kubernetes, Prometheus, and Grafana</td></tr>
+            <tr><td><strong>Enterprise QA</strong><br>Organization requiring broad compatibility, governance, and release evidence.</td><td>Jenkins and Terraform</td><td>Selenium, Cypress, BrowserStack, and Apache JMeter</td><td>Docker, controlled environments, and Grafana dashboards</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="inner">DevOps, QA and Test Automation Dashboard (c) 2026</div></footer>
+</body>
+</html>

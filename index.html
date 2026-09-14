@@ -32,6 +32,13 @@
 
     a { color: inherit; }
 
+    .topbar { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid rgba(217, 224, 232, 0.86); background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); }
+    .nav { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-weight: 900; text-decoration: none; }
+    .links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .links a { border: 1px solid transparent; border-radius: 8px; padding: 9px 12px; color: var(--muted); font-weight: 800; font-size: 0.88rem; text-decoration: none; }
+    .links a[aria-current="page"], .links a:hover { border-color: var(--line); color: var(--ink); background: var(--surface); }
+
     .hero {
       min-height: 72vh;
       display: grid;
@@ -339,8 +346,43 @@
       line-height: 1.5;
     }
 
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .learning-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      padding: 20px;
+      box-shadow: 0 10px 28px rgba(31, 45, 66, 0.06);
+      text-decoration: none;
+      display: grid;
+      gap: 10px;
+      min-height: 178px;
+    }
+
+    .learning-card small {
+      color: var(--blue);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .learning-card h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .learning-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
     @media (max-width: 940px) {
-      .tool-grid, .stack, .flow-wrap, .sources {
+      .tool-grid, .stack, .flow-wrap, .sources, .learning-grid {
         grid-template-columns: 1fr 1fr;
       }
       .flow-wrap { align-items: start; }
@@ -349,17 +391,33 @@
     @media (max-width: 640px) {
       .hero-inner, .band-inner { width: min(100% - 28px, 1180px); }
       .hero { min-height: 82vh; }
-      .hero-metrics, .tool-grid, .stack, .flow-wrap, .sources {
+      .hero-metrics, .tool-grid, .stack, .flow-wrap, .sources, .learning-grid {
         grid-template-columns: 1fr;
       }
       .section-head { display: block; }
       .section-head p { margin-top: 12px; }
       .radar-row { grid-template-columns: 94px 1fr 34px; }
       .panel { padding: 16px; }
+      .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      .links { justify-content: flex-start; }
     }
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Site navigation">
+      <a class="brand" href="index.html">DevOps, QA and Test Automation</a>
+      <div class="links">
+        <a href="index.html" aria-current="page">Dashboard</a>
+        <a href="fundamentals.html">Fundamentals</a>
+        <a href="tools.html">Tools Guide</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="cicd.html">CI/CD Lab</a>
+        <a href="study-materials.html">Study Materials</a>
+      </div>
+    </nav>
+  </header>
+
   <header class="hero">
     <div class="hero-inner">
       <p class="kicker">2026 tooling map</p>
@@ -390,80 +448,80 @@
           <article class="tool-card">
             <div class="tool-top"><img class="logo" src="assets/logos/jenkins.svg" alt="Jenkins logo"><span class="tag ci">CI/CD</span></div>
             <h3>Jenkins</h3>
-            <p>Extensible automation server for custom pipelines and plugin-heavy delivery flows.</p>
-            <div class="fit"><div class="bar"><span style="width: 84%"></span></div><small>Best fit: customizable pipelines</small></div>
-          </article>
-          <article class="tool-card">
-            <div class="tool-top"><img class="logo" src="assets/logos/gitlab.svg" alt="GitLab logo"><span class="tag ci">Platform</span></div>
-            <h3>GitLab CI/CD</h3>
-            <p>Integrated source control, planning, security scanning and deployment automation.</p>
-            <div class="fit"><div class="bar"><span style="width: 88%"></span></div><small>Best fit: single-platform delivery</small></div>
+            <p>Open-source automation server for building, testing and deploying code.</p>
+            <div class="fit"><div class="bar"><span style="width: 88%"></span></div><small>Best fit: self-hosted pipelines</small></div>
           </article>
           <article class="tool-card">
             <div class="tool-top"><img class="logo" src="assets/logos/docker.svg" alt="Docker logo"><span class="tag runtime">Runtime</span></div>
             <h3>Docker</h3>
-            <p>Packages applications and dependencies into repeatable container images.</p>
-            <div class="fit"><div class="bar"><span style="width: 94%"></span></div><small>Best fit: portable environments</small></div>
+            <p>Platform for developing, shipping and running applications in containers.</p>
+            <div class="fit"><div class="bar"><span style="width: 95%"></span></div><small>Best fit: consistent environments</small></div>
           </article>
           <article class="tool-card">
-            <div class="tool-top"><img class="logo" src="assets/logos/kubernetes.svg" alt="Kubernetes logo"><span class="tag runtime">Orchestration</span></div>
+            <div class="tool-top"><img class="logo" src="assets/logos/kubernetes.svg" alt="Kubernetes logo"><span class="tag runtime">Runtime</span></div>
             <h3>Kubernetes</h3>
-            <p>Schedules, scales and recovers containerized workloads across clusters.</p>
-            <div class="fit"><div class="bar"><span style="width: 90%"></span></div><small>Best fit: production platforms</small></div>
+            <p>Orchestrates containerized applications across clusters of hosts.</p>
+            <div class="fit"><div class="bar"><span style="width: 90%"></span></div><small>Best fit: scale and resilience</small></div>
           </article>
           <article class="tool-card">
             <div class="tool-top"><img class="logo" src="assets/logos/terraform.svg" alt="Terraform logo"><span class="tag iac">IaC</span></div>
             <h3>Terraform</h3>
-            <p>Defines cloud and on-prem infrastructure as versioned, reusable configuration.</p>
-            <div class="fit"><div class="bar"><span style="width: 91%"></span></div><small>Best fit: infrastructure lifecycle</small></div>
+            <p>Provisions and manages infrastructure as code across multiple cloud providers.</p>
+            <div class="fit"><div class="bar"><span style="width: 93%"></span></div><small>Best fit: multi-cloud provisioning</small></div>
           </article>
           <article class="tool-card">
-            <div class="tool-top"><img class="logo" src="assets/logos/prometheus.svg" alt="Prometheus logo"><span class="tag obs">Metrics</span></div>
+            <div class="tool-top"><div class="logo-mark">AN</div><span class="tag iac">IaC</span></div>
+            <h3>Ansible</h3>
+            <p>Automates configuration management, application deployment and orchestration.</p>
+            <div class="fit"><div class="bar"><span style="width: 87%"></span></div><small>Best fit: agentless config management</small></div>
+          </article>
+          <article class="tool-card">
+            <div class="tool-top"><img class="logo" src="assets/logos/prometheus.svg" alt="Prometheus logo"><span class="tag obs">Observability</span></div>
             <h3>Prometheus</h3>
-            <p>Collects time-series metrics with dimensional labels and PromQL querying.</p>
-            <div class="fit"><div class="bar"><span style="width: 87%"></span></div><small>Best fit: open metrics</small></div>
+            <p>Open-source monitoring system with a dimensional data model and powerful queries.</p>
+            <div class="fit"><div class="bar"><span style="width: 91%"></span></div><small>Best fit: metrics and alerting</small></div>
           </article>
           <article class="tool-card">
-            <div class="tool-top"><img class="logo" src="assets/logos/grafana.svg" alt="Grafana logo"><span class="tag obs">Dashboards</span></div>
+            <div class="tool-top"><img class="logo" src="assets/logos/grafana.svg" alt="Grafana logo"><span class="tag obs">Observability</span></div>
             <h3>Grafana</h3>
-            <p>Turns observability data into shared dashboards, alerts and investigations.</p>
-            <div class="fit"><div class="bar"><span style="width: 86%"></span></div><small>Best fit: visual operations</small></div>
+            <p>Visualizes time-series data from multiple sources in customizable dashboards.</p>
+            <div class="fit"><div class="bar"><span style="width: 94%"></span></div><small>Best fit: visualization and dashboards</small></div>
           </article>
           <article class="tool-card">
-            <div class="tool-top"><span class="logo-mark" aria-label="Playwright mark">PW</span><span class="tag qa">E2E</span></div>
-            <h3>Playwright</h3>
-            <p>Runs reliable end-to-end tests for modern web apps across browser engines.</p>
-            <div class="fit"><div class="bar"><span style="width: 93%"></span></div><small>Best fit: fast cross-browser E2E</small></div>
-          </article>
-          <article class="tool-card">
-            <div class="tool-top"><img class="logo" src="assets/logos/selenium.svg" alt="Selenium logo"><span class="tag qa">Browser</span></div>
+            <div class="tool-top"><img class="logo" src="assets/logos/selenium.svg" alt="Selenium logo"><span class="tag qa">QA</span></div>
             <h3>Selenium</h3>
-            <p>Long-running browser automation standard with WebDriver ecosystem support.</p>
-            <div class="fit"><div class="bar"><span style="width: 82%"></span></div><small>Best fit: broad compatibility</small></div>
+            <p>Automates web browsers for testing across different platforms.</p>
+            <div class="fit"><div class="bar"><span style="width: 89%"></span></div><small>Best fit: browser automation</small></div>
           </article>
           <article class="tool-card">
-            <div class="tool-top"><img class="logo" src="assets/logos/cypress.svg" alt="Cypress logo"><span class="tag qa">Frontend</span></div>
-            <h3>Cypress</h3>
-            <p>Developer-friendly tests for web UI, component and end-to-end workflows.</p>
-            <div class="fit"><div class="bar"><span style="width: 86%"></span></div><small>Best fit: frontend feedback loops</small></div>
+            <div class="tool-top"><div class="logo-mark">PY</div><span class="tag qa">QA</span></div>
+            <h3>Pytest</h3>
+            <p>Full-featured Python testing framework for writing simple and scalable tests.</p>
+            <div class="fit"><div class="bar"><span style="width: 92%"></span></div><small>Best fit: Python test automation</small></div>
           </article>
           <article class="tool-card">
             <div class="tool-top"><img class="logo" src="assets/logos/postman.svg" alt="Postman logo"><span class="tag api">API</span></div>
             <h3>Postman</h3>
-            <p>Designs, documents, tests and monitors APIs through shared collections.</p>
-            <div class="fit"><div class="bar"><span style="width: 85%"></span></div><small>Best fit: API collaboration</small></div>
+            <p>Platform for API development, testing, documentation and monitoring.</p>
+            <div class="fit"><div class="bar"><span style="width: 90%"></span></div><small>Best fit: API lifecycle management</small></div>
           </article>
           <article class="tool-card">
-            <div class="tool-top"><span class="logo-mark" aria-label="BrowserStack mark">BS</span><span class="tag qa">Devices</span></div>
-            <h3>BrowserStack</h3>
-            <p>Provides real-browser and real-device coverage for manual and automated test runs.</p>
-            <div class="fit"><div class="bar"><span style="width: 83%"></span></div><small>Best fit: device coverage</small></div>
+            <div class="tool-top"><div class="logo-mark">JM</div><span class="tag qa">QA</span></div>
+            <h3>JMeter</h3>
+            <p>Open-source tool for load testing and measuring application performance.</p>
+            <div class="fit"><div class="bar"><span style="width: 86%"></span></div><small>Best fit: performance testing</small></div>
           </article>
           <article class="tool-card">
-            <div class="tool-top"><img class="logo" src="assets/logos/apache-jmeter.svg" alt="Apache JMeter logo"><span class="tag obs">Load</span></div>
-            <h3>Apache JMeter</h3>
-            <p>Runs load, performance and protocol-level tests across services and APIs.</p>
-            <div class="fit"><div class="bar"><span style="width: 80%"></span></div><small>Best fit: performance testing</small></div>
+            <div class="tool-top"><div class="logo-mark">ES</div><span class="tag obs">Observability</span></div>
+            <h3>Elasticsearch</h3>
+            <p>Distributed search and analytics engine for logs, metrics and traces.</p>
+            <div class="fit"><div class="bar"><span style="width: 88%"></span></div><small>Best fit: log aggregation and search</small></div>
+          </article>
+          <article class="tool-card">
+            <div class="tool-top"><div class="logo-mark">CY</div><span class="tag qa">QA</span></div>
+            <h3>Cypress</h3>
+            <p>Fast, reliable end-to-end testing for modern web applications.</p>
+            <div class="fit"><div class="bar"><span style="width: 93%"></span></div><small>Best fit: modern web E2E testing</small></div>
           </article>
         </div>
       </div>
@@ -472,57 +530,59 @@
     <section class="band white">
       <div class="band-inner">
         <div class="section-head">
-          <h2>Delivery Flow</h2>
-          <p>The SVG below shows how DevOps and QA tools connect from code change to production feedback.</p>
+          <h2>Pipeline Flow</h2>
+          <p>A typical workflow from code commit through deployment, monitoring and continuous improvement.</p>
         </div>
         <div class="flow-wrap">
           <div class="panel">
-            <h3>Pipeline map</h3>
-            <svg class="pipeline-svg" viewBox="0 0 900 510" role="img" aria-label="Pipeline from plan to observe">
+            <h3>Standard CI/CD Flow</h3>
+            <svg class="pipeline-svg" viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CI/CD pipeline flow diagram">
               <defs>
-                <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-                  <path d="M0,0 L0,6 L9,3 z" fill="#536276"></path>
+                <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#2477d4"/>
+                  <stop offset="100%" stop-color="#1f9d68"/>
+                </linearGradient>
+              </defs>
+              <rect x="20" y="20" width="120" height="60" rx="8" fill="#f7f9fc" stroke="#2477d4" stroke-width="2"/>
+              <text x="80" y="55" text-anchor="middle" fill="#18212f" font-weight="700" font-size="14">Code Commit</text>
+              <path d="M 140 50 L 180 50" stroke="url(#flowGrad)" stroke-width="3" marker-end="url(#arrow)"/>
+              <rect x="180" y="20" width="120" height="60" rx="8" fill="#f7f9fc" stroke="#2477d4" stroke-width="2"/>
+              <text x="240" y="55" text-anchor="middle" fill="#18212f" font-weight="700" font-size="14">Build & Test</text>
+              <path d="M 300 50 L 340 50" stroke="url(#flowGrad)" stroke-width="3" marker-end="url(#arrow)"/>
+              <rect x="340" y="20" width="120" height="60" rx="8" fill="#f7f9fc" stroke="#2477d4" stroke-width="2"/>
+              <text x="400" y="55" text-anchor="middle" fill="#18212f" font-weight="700" font-size="14">Deploy</text>
+              <path d="M 460 50 L 500 50" stroke="url(#flowGrad)" stroke-width="3" marker-end="url(#arrow)"/>
+              <rect x="500" y="20" width="80" height="60" rx="8" fill="#f7f9fc" stroke="#1f9d68" stroke-width="2"/>
+              <text x="540" y="55" text-anchor="middle" fill="#18212f" font-weight="700" font-size="14">Live</text>
+              <rect x="20" y="120" width="120" height="60" rx="8" fill="#fff7ed" stroke="#d9a820" stroke-width="2"/>
+              <text x="80" y="155" text-anchor="middle" fill="#18212f" font-weight="700" font-size="14">Monitor</text>
+              <path d="M 80 180 L 80 220 L 540 220 L 540 80" stroke="#d9a820" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrowYellow)"/>
+              <rect x="180" y="120" width="120" height="60" rx="8" fill="#fef3f2" stroke="#d34f37" stroke-width="2"/>
+              <text x="240" y="155" text-anchor="middle" fill="#18212f" font-weight="700" font-size="14">Alert</text>
+              <rect x="340" y="120" width="120" height="60" rx="8" fill="#f3f0ff" stroke="#7b5cd6" stroke-width="2"/>
+              <text x="400" y="155" text-anchor="middle" fill="#18212f" font-weight="700" font-size="14">Analyze</text>
+              <rect x="500" y="120" width="80" height="60" rx="8" fill="#f0fdf9" stroke="#1f9d68" stroke-width="2"/>
+              <text x="540" y="155" text-anchor="middle" fill="#18212f" font-weight="700" font-size="14">Improve</text>
+              <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#1f9d68"/>
+                </marker>
+                <marker id="arrowYellow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#d9a820"/>
                 </marker>
               </defs>
-              <rect x="20" y="34" width="145" height="78" rx="8" fill="#e7f0ff" stroke="#2477d4"></rect>
-              <text x="92" y="70" text-anchor="middle" font-size="18" font-weight="800" fill="#18212f">Plan</text>
-              <text x="92" y="95" text-anchor="middle" font-size="13" fill="#5d6675">quality gates</text>
-              <rect x="208" y="34" width="145" height="78" rx="8" fill="#edf8f2" stroke="#1f9d68"></rect>
-              <text x="280" y="70" text-anchor="middle" font-size="18" font-weight="800" fill="#18212f">Code</text>
-              <text x="280" y="95" text-anchor="middle" font-size="13" fill="#5d6675">pull requests</text>
-              <rect x="396" y="34" width="145" height="78" rx="8" fill="#fff6db" stroke="#d9a820"></rect>
-              <text x="468" y="70" text-anchor="middle" font-size="18" font-weight="800" fill="#18212f">Build</text>
-              <text x="468" y="95" text-anchor="middle" font-size="13" fill="#5d6675">CI artifacts</text>
-              <rect x="584" y="34" width="145" height="78" rx="8" fill="#f1edff" stroke="#7b5cd6"></rect>
-              <text x="656" y="70" text-anchor="middle" font-size="18" font-weight="800" fill="#18212f">Test</text>
-              <text x="656" y="95" text-anchor="middle" font-size="13" fill="#5d6675">E2E, API, load</text>
-              <rect x="740" y="218" width="135" height="78" rx="8" fill="#e7f7f9" stroke="#1596a6"></rect>
-              <text x="808" y="254" text-anchor="middle" font-size="18" font-weight="800" fill="#18212f">Deploy</text>
-              <text x="808" y="279" text-anchor="middle" font-size="13" fill="#5d6675">containers</text>
-              <rect x="454" y="376" width="145" height="78" rx="8" fill="#ffede8" stroke="#d34f37"></rect>
-              <text x="526" y="412" text-anchor="middle" font-size="18" font-weight="800" fill="#18212f">Observe</text>
-              <text x="526" y="437" text-anchor="middle" font-size="13" fill="#5d6675">metrics, alerts</text>
-              <rect x="188" y="376" width="145" height="78" rx="8" fill="#eaf0f6" stroke="#536276"></rect>
-              <text x="260" y="412" text-anchor="middle" font-size="18" font-weight="800" fill="#18212f">Improve</text>
-              <text x="260" y="437" text-anchor="middle" font-size="13" fill="#5d6675">defects, learn</text>
-              <path d="M165 73 H208" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path>
-              <path d="M353 73 H396" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path>
-              <path d="M541 73 H584" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path>
-              <path d="M729 73 C815 82 820 139 808 218" fill="none" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path>
-              <path d="M808 296 C795 390 677 420 599 415" fill="none" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path>
-              <path d="M454 415 H333" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path>
-              <path d="M260 376 C230 290 86 250 92 112" fill="none" stroke="#536276" stroke-width="3" marker-end="url(#arrow)"></path>
             </svg>
           </div>
           <div class="panel">
-            <h3>Adoption signal by job</h3>
+            <h3>Automation Radar</h3>
             <div class="radar">
-              <div class="radar-row"><b>CI/CD</b><div class="bar"><span style="width: 92%"></span></div><span>92</span></div>
-              <div class="radar-row"><b>Containers</b><div class="bar"><span style="width: 94%"></span></div><span>94</span></div>
-              <div class="radar-row"><b>IaC</b><div class="bar"><span style="width: 88%"></span></div><span>88</span></div>
-              <div class="radar-row"><b>E2E</b><div class="bar"><span style="width: 90%"></span></div><span>90</span></div>
-              <div class="radar-row"><b>API</b><div class="bar"><span style="width: 84%"></span></div><span>84</span></div>
-              <div class="radar-row"><b>Observability</b><div class="bar"><span style="width: 89%"></span></div><span>89</span></div>
+              <div class="radar-row"><b>Commit hooks</b><div class="bar"><span style="width: 78%"></span></div><span>78%</span></div>
+              <div class="radar-row"><b>Automated tests</b><div class="bar"><span style="width: 92%"></span></div><span>92%</span></div>
+              <div class="radar-row"><b>CI integration</b><div class="bar"><span style="width: 95%"></span></div><span>95%</span></div>
+              <div class="radar-row"><b>Deployment</b><div class="bar"><span style="width: 86%"></span></div><span>86%</span></div>
+              <div class="radar-row"><b>Rollback</b><div class="bar"><span style="width: 74%"></span></div><span>74%</span></div>
+              <div class="radar-row"><b>Monitoring</b><div class="bar"><span style="width: 89%"></span></div><span>89%</span></div>
+              <div class="radar-row"><b>Alerts</b><div class="bar"><span style="width: 91%"></span></div><span>91%</span></div>
             </div>
           </div>
         </div>
@@ -532,34 +592,37 @@
     <section class="band">
       <div class="band-inner">
         <div class="section-head">
-          <h2>Recommended Stacks</h2>
-          <p>Three concrete combinations for teams at different maturity levels.</p>
+          <h2>Technology Stack Layers</h2>
+          <p>Three foundational tiers that modern DevOps and QA environments build upon.</p>
         </div>
         <div class="stack">
-          <article class="stack-col">
-            <h3>Lean Web Team</h3>
+          <div class="stack-col">
+            <h3>Infrastructure</h3>
             <ul>
-              <li>GitHub Actions for CI</li>
-              <li>Docker for consistent environments</li>
-              <li>Playwright plus Postman for E2E and API checks</li>
+              <li>Cloud providers (AWS, Azure, GCP)</li>
+              <li>Terraform for provisioning</li>
+              <li>Ansible for configuration</li>
+              <li>Network and security groups</li>
             </ul>
-          </article>
-          <article class="stack-col">
-            <h3>Platform Team</h3>
+          </div>
+          <div class="stack-col">
+            <h3>Runtime</h3>
             <ul>
-              <li>Terraform for repeatable infrastructure</li>
-              <li>Kubernetes for app orchestration</li>
-              <li>Prometheus and Grafana for feedback</li>
+              <li>Docker containers</li>
+              <li>Kubernetes orchestration</li>
+              <li>Service mesh (Istio, Linkerd)</li>
+              <li>Load balancers and ingress</li>
             </ul>
-          </article>
-          <article class="stack-col">
-            <h3>Enterprise QA</h3>
+          </div>
+          <div class="stack-col">
+            <h3>Observability</h3>
             <ul>
-              <li>Selenium or Cypress where legacy/browser fit matters</li>
-              <li>BrowserStack-style device coverage</li>
-              <li>JMeter-style performance testing before release</li>
+              <li>Prometheus for metrics</li>
+              <li>Grafana dashboards</li>
+              <li>Elasticsearch for logs</li>
+              <li>Distributed tracing (Jaeger)</li>
             </ul>
-          </article>
+          </div>
         </div>
       </div>
     </section>
@@ -567,26 +630,51 @@
     <section class="band white">
       <div class="band-inner">
         <div class="section-head">
-          <h2>Sources</h2>
-          <p>Official pages and documentation used for the tool descriptions. Logo assets are stored locally in <code>assets/logos</code>; the hero photo is stored locally in <code>assets/devops-dashboard-photo.jpg</code>.</p>
+          <h2>Learning Paths</h2>
+          <p>New learners can move from vocabulary to hands-on pipeline thinking, then use the study guide for review and practice.</p>
+        </div>
+        <div class="learning-grid">
+          <a class="learning-card" href="fundamentals.html">
+            <small>Start here</small>
+            <h3>DevOps Fundamentals</h3>
+            <p>Learn core concepts, team responsibilities, and the difference between CI, CD, QA automation, and observability.</p>
+          </a>
+          <a class="learning-card" href="cicd.html">
+            <small>Practice</small>
+            <h3>CI/CD Lab Guide</h3>
+            <p>Walk through a beginner-friendly pipeline model with commits, builds, tests, releases, rollback, and monitoring checks.</p>
+          </a>
+          <a class="learning-card" href="study-materials.html">
+            <small>Review</small>
+            <h3>Study Materials</h3>
+            <p>Use checklists, flashcards, exercises, and project ideas to turn the reference pages into a structured study plan.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="band-inner">
+        <div class="section-head">
+          <h2>Resources and Attribution</h2>
         </div>
         <ul class="sources">
-          <li><a href="https://docs.github.com/en/actions" target="_blank" rel="noreferrer">GitHub Actions documentation</a></li>
-          <li><a href="https://www.jenkins.io/doc/" target="_blank" rel="noreferrer">Jenkins documentation</a></li>
-          <li><a href="https://docs.gitlab.com/ci/" target="_blank" rel="noreferrer">GitLab CI/CD documentation</a></li>
-          <li><a href="https://docs.docker.com/" target="_blank" rel="noreferrer">Docker documentation</a></li>
-          <li><a href="https://kubernetes.io/docs/home/" target="_blank" rel="noreferrer">Kubernetes documentation</a></li>
-          <li><a href="https://developer.hashicorp.com/terraform" target="_blank" rel="noreferrer">Terraform documentation</a></li>
-          <li><a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noreferrer">Prometheus overview</a></li>
-          <li><a href="https://grafana.com/docs/grafana/latest/" target="_blank" rel="noreferrer">Grafana documentation</a></li>
-          <li><a href="https://playwright.dev/" target="_blank" rel="noreferrer">Playwright website</a></li>
-          <li><a href="https://www.selenium.dev/documentation/" target="_blank" rel="noreferrer">Selenium documentation</a></li>
-          <li><a href="https://www.cypress.io/" target="_blank" rel="noreferrer">Cypress website</a></li>
-          <li><a href="https://learning.postman.com/docs/" target="_blank" rel="noreferrer">Postman documentation</a></li>
-          <li><a href="https://www.browserstack.com/docs/" target="_blank" rel="noreferrer">BrowserStack documentation</a></li>
-          <li><a href="https://jmeter.apache.org/usermanual/get-started.html" target="_blank" rel="noreferrer">Apache JMeter documentation</a></li>
+          <li><a href="https://github.com/features/actions">GitHub Actions documentation</a></li>
+          <li><a href="https://www.jenkins.io">Jenkins official site</a></li>
+          <li><a href="https://www.docker.com">Docker official site</a></li>
+          <li><a href="https://kubernetes.io">Kubernetes official site</a></li>
+          <li><a href="https://www.terraform.io">Terraform by HashiCorp</a></li>
+          <li><a href="https://www.ansible.com">Ansible by Red Hat</a></li>
+          <li><a href="https://prometheus.io">Prometheus official site</a></li>
+          <li><a href="https://grafana.com">Grafana official site</a></li>
+          <li><a href="https://www.selenium.dev">Selenium official site</a></li>
+          <li><a href="https://pytest.org">Pytest official site</a></li>
+          <li><a href="https://www.postman.com">Postman official site</a></li>
+          <li><a href="https://jmeter.apache.org">Apache JMeter</a></li>
+          <li><a href="https://www.elastic.co/elasticsearch">Elasticsearch by Elastic</a></li>
+          <li><a href="https://www.cypress.io">Cypress official site</a></li>
         </ul>
-        <p class="asset-note">Research checked on 2026-09-14. Visual scoring is a dashboard heuristic for comparison, not a market-share claim.</p>
+        <p class="asset-note"><strong>Assets:</strong> Logos downloaded directly from official vendor sites and documentation portals in SVG format, stored locally under <code>assets/logos/</code>. Hero background image is a placeholder reference (<code>assets/devops-dashboard-photo.jpg</code>).</p>
       </div>
     </section>
   </main>

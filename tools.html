@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tools Guide - DevOps, QA and Test Automation</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18212f;
+      --muted: #5d6675;
+      --line: #d9e0e8;
+      --surface: #f7f9fc;
+      --white: #ffffff;
+      --blue: #2477d4;
+      --green: #1f9d68;
+      --red: #d34f37;
+      --yellow: #d9a820;
+      --purple: #7b5cd6;
+      --teal: #1596a6;
+      --shadow: 0 18px 45px rgba(21, 34, 55, 0.12);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: #eef3f7; }
+    a { color: inherit; }
+
+    .topbar { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid rgba(217, 224, 232, 0.86); background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); }
+    .nav { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-weight: 900; text-decoration: none; }
+    .links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .links a { border: 1px solid transparent; border-radius: 8px; padding: 9px 12px; color: var(--muted); font-weight: 800; font-size: 0.88rem; text-decoration: none; }
+    .links a[aria-current="page"], .links a:hover { border-color: var(--line); color: var(--ink); background: var(--surface); }
+
+    .hero { background: linear-gradient(90deg, rgba(10, 18, 32, 0.92), rgba(10, 18, 32, 0.58)), url("assets/devops-dashboard-photo.jpg") center/cover; color: white; }
+    .inner { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; }
+    .hero .inner { padding: 78px 0 86px; }
+    .kicker { margin: 0 0 16px; color: #a8e4c4; font-size: 0.82rem; font-weight: 900; text-transform: uppercase; }
+    h1 { width: min(850px, 100%); margin: 0; font-size: clamp(2.35rem, 5vw, 4.8rem); line-height: 1; letter-spacing: 0; }
+    .lead { width: min(720px, 100%); margin: 22px 0 0; color: rgba(255, 255, 255, 0.84); font-size: 1.05rem; line-height: 1.7; }
+
+    .band { padding: 54px 0; background: var(--surface); }
+    .band.white { background: var(--white); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 22px; }
+    h2 { margin: 0; font-size: clamp(1.75rem, 3vw, 2.7rem); }
+    .section-head p { width: min(500px, 100%); margin: 0; color: var(--muted); line-height: 1.55; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .tool { min-height: 265px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); box-shadow: 0 10px 28px rgba(31, 45, 66, 0.06); padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .tool-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .logo { width: 44px; height: 44px; object-fit: contain; }
+    .mark { width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center; color: white; background: var(--purple); font-weight: 900; }
+    .tag { border-radius: 999px; padding: 6px 10px; color: white; font-size: 0.72rem; font-weight: 900; white-space: nowrap; }
+    .ci { background: var(--blue); } .runtime { background: var(--teal); } .iac { background: var(--purple); } .qa { background: var(--green); } .api { background: var(--yellow); color: #2f2508; } .obs { background: var(--red); }
+    .tool h3 { margin: 0; font-size: 1.25rem; }
+    .tool p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .tool ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.6; }
+    .tool a { margin-top: auto; color: var(--blue); font-weight: 900; text-decoration: none; }
+
+    footer { padding: 28px 0; border-top: 1px solid var(--line); background: var(--white); color: var(--muted); }
+
+    @media (max-width: 940px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px) { .nav { align-items: flex-start; flex-direction: column; padding: 14px 0; } .links { justify-content: flex-start; } .grid { grid-template-columns: 1fr; } .section-head { display: block; } .section-head p { margin-top: 12px; } .hero .inner { padding: 56px 0 64px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Site navigation">
+      <a class="brand" href="index.html">DevOps, QA and Test Automation</a>
+      <div class="links">
+        <a href="index.html">Dashboard</a>
+        <a href="fundamentals.html">Fundamentals</a>
+        <a href="tools.html" aria-current="page">Tools Guide</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="cicd.html">CI/CD Lab</a>
+        <a href="study-materials.html">Study Materials</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="inner">
+        <p class="kicker">Reference catalog</p>
+        <h1>Tool guidance for modern delivery teams</h1>
+        <p class="lead">A practical breakdown of where each tool fits, what it is strongest at, and how it contributes to a reliable CI/CD and QA automation system.</p>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="inner">
+        <div class="section-head">
+          <h2>CI/CD and Delivery</h2>
+          <p>These tools coordinate the repeatable steps that turn commits into tested, deployable artifacts.</p>
+        </div>
+        <div class="grid">
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/github-actions.svg" alt="GitHub Actions logo"><span class="tag ci">CI/CD</span></div><h3>GitHub Actions</h3><p>Best for repository-native automation where pull requests, checks, releases, and packages live in GitHub.</p><ul><li>Fast onboarding for GitHub-hosted projects.</li><li>Matrix builds for versions and platforms.</li><li>Strong marketplace ecosystem.</li></ul><a href="https://docs.github.com/en/actions" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/jenkins.svg" alt="Jenkins logo"><span class="tag ci">CI/CD</span></div><h3>Jenkins</h3><p>Best for highly customized automation, self-hosted runners, legacy integrations, and compliance-heavy environments.</p><ul><li>Deep plugin ecosystem.</li><li>Declarative and scripted pipelines.</li><li>Strong fit for private infrastructure.</li></ul><a href="https://www.jenkins.io/doc/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/gitlab.svg" alt="GitLab logo"><span class="tag ci">Platform</span></div><h3>GitLab CI/CD</h3><p>Best for teams that want source control, CI, security scanning, registry, and deployment workflows in one platform.</p><ul><li>Pipeline-as-code in the repository.</li><li>Integrated DevSecOps features.</li><li>Useful for end-to-end platform governance.</li></ul><a href="https://docs.gitlab.com/ci/" target="_blank" rel="noreferrer">Official documentation</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band white">
+      <div class="inner">
+        <div class="section-head">
+          <h2>Runtime and Infrastructure</h2>
+          <p>These tools make environments repeatable, scalable, and easier to recover when production changes.</p>
+        </div>
+        <div class="grid">
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/docker.svg" alt="Docker logo"><span class="tag runtime">Runtime</span></div><h3>Docker</h3><p>Packages applications with their dependencies so development, CI, and production behave consistently.</p><ul><li>Portable application images.</li><li>Predictable CI environments.</li><li>Foundation for container deployment.</li></ul><a href="https://docs.docker.com/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/kubernetes.svg" alt="Kubernetes logo"><span class="tag runtime">Orchestration</span></div><h3>Kubernetes</h3><p>Schedules, scales, and heals containerized applications across clustered infrastructure.</p><ul><li>Rolling updates and rollbacks.</li><li>Service discovery and scaling.</li><li>Production-grade orchestration.</li></ul><a href="https://kubernetes.io/docs/home/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/terraform.svg" alt="Terraform logo"><span class="tag iac">IaC</span></div><h3>Terraform</h3><p>Defines cloud and platform infrastructure as reviewable configuration with repeatable state management.</p><ul><li>Declarative provisioning.</li><li>Multi-cloud workflows.</li><li>Change review before apply.</li></ul><a href="https://developer.hashicorp.com/terraform" target="_blank" rel="noreferrer">Official documentation</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="inner">
+        <div class="section-head"><h2>QA Automation</h2><p>These tools protect user journeys, browser compatibility, API contracts, and performance budgets.</p></div>
+        <div class="grid">
+          <article class="tool"><div class="tool-top"><span class="mark">PW</span><span class="tag qa">E2E</span></div><h3>Playwright</h3><p>Fast end-to-end testing across Chromium, Firefox, and WebKit with auto-waiting and trace diagnostics.</p><ul><li>Modern browser automation.</li><li>Strong debugging artifacts.</li><li>Excellent fit for web apps.</li></ul><a href="https://playwright.dev/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/selenium.svg" alt="Selenium logo"><span class="tag qa">Browser</span></div><h3>Selenium</h3><p>Longstanding WebDriver automation standard with broad language, browser, and grid support.</p><ul><li>Large ecosystem.</li><li>Enterprise compatibility.</li><li>Useful for legacy coverage.</li></ul><a href="https://www.selenium.dev/documentation/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/cypress.svg" alt="Cypress logo"><span class="tag qa">Frontend</span></div><h3>Cypress</h3><p>Developer-focused web testing with fast local feedback for UI, component, and end-to-end workflows.</p><ul><li>Great developer experience.</li><li>Time-travel style debugging.</li><li>Strong frontend feedback loop.</li></ul><a href="https://www.cypress.io/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/postman.svg" alt="Postman logo"><span class="tag api">API</span></div><h3>Postman</h3><p>API design, testing, collection sharing, monitoring, and headless CI execution through Newman.</p><ul><li>Shared API collections.</li><li>Mocking and documentation.</li><li>Regression checks in CI.</li></ul><a href="https://learning.postman.com/docs/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><span class="mark">BS</span><span class="tag qa">Devices</span></div><h3>BrowserStack</h3><p>Cloud-based real device and browser coverage for exploratory and automated compatibility testing.</p><ul><li>Real device coverage.</li><li>Parallel browser matrixes.</li><li>Useful for release confidence.</li></ul><a href="https://www.browserstack.com/docs/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/apache-jmeter.svg" alt="Apache JMeter logo"><span class="tag obs">Load</span></div><h3>Apache JMeter</h3><p>Performance and load testing for web applications, APIs, databases, and protocol-level systems.</p><ul><li>Throughput benchmarking.</li><li>Stress and soak testing.</li><li>Release performance gates.</li></ul><a href="https://jmeter.apache.org/usermanual/get-started.html" target="_blank" rel="noreferrer">Official documentation</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band white">
+      <div class="inner">
+        <div class="section-head"><h2>Observability</h2><p>These tools close the loop after deployment so teams can detect regressions, debug incidents, and improve planning.</p></div>
+        <div class="grid">
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/prometheus.svg" alt="Prometheus logo"><span class="tag obs">Metrics</span></div><h3>Prometheus</h3><p>Pull-based time-series metrics, dimensional labels, and PromQL queries for service and infrastructure health.</p><ul><li>Open metrics collection.</li><li>Alerting workflows.</li><li>Strong Kubernetes fit.</li></ul><a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noreferrer">Official documentation</a></article>
+          <article class="tool"><div class="tool-top"><img class="logo" src="assets/logos/grafana.svg" alt="Grafana logo"><span class="tag obs">Dashboards</span></div><h3>Grafana</h3><p>Shared operational dashboards and alerting across metrics, logs, traces, and production health signals.</p><ul><li>Multi-source dashboards.</li><li>Operational views for teams.</li><li>Incident investigation support.</li></ul><a href="https://grafana.com/docs/grafana/latest/" target="_blank" rel="noreferrer">Official documentation</a></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="inner">DevOps, QA and Test Automation Dashboard (c) 2026</div></footer>
+</body>
+</html>
